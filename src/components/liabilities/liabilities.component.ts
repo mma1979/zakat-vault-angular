@@ -91,7 +91,7 @@ import { LanguageService } from '../../services/language.service';
                          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400">
                            <i class="fa-solid fa-check"></i> Deductible
                          </span>
-                       } else {
+                       } @else {
                          <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-500">
                             Non-Deductible
                          </span>
