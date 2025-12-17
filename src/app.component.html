@@ -1,0 +1,103 @@
+<div class="flex h-screen bg-gray-50 dark:bg-slate-900 transition-colors duration-300">
+  
+  <!-- Sidebar (Desktop) -->
+  <aside class="hidden md:flex flex-col w-64 bg-slate-900 text-white shadow-xl z-20">
+    <div class="p-6 border-b border-slate-700 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-slate-900 font-bold text-xl shadow-lg">
+        <i class="fa-solid fa-kaaba"></i>
+      </div>
+      <h1 class="text-2xl font-bold tracking-tight text-amber-500">{{ lang.t().appTitle }}</h1>
+    </div>
+
+    <nav class="flex-1 px-4 py-6 space-y-2">
+      <a routerLink="/dashboard" routerLinkActive="bg-slate-800 text-amber-400 border-r-4 border-amber-400" 
+         class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-all group">
+        <i class="fa-solid fa-chart-pie w-5 group-hover:scale-110 transition-transform"></i>
+        <span class="font-medium">{{ lang.t().dashboard }}</span>
+      </a>
+      
+      <a routerLink="/transactions" routerLinkActive="bg-slate-800 text-amber-400 border-r-4 border-amber-400" 
+         class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-all group">
+        <i class="fa-solid fa-money-bill-transfer w-5 group-hover:scale-110 transition-transform"></i>
+        <span class="font-medium">{{ lang.t().transactions }}</span>
+      </a>
+
+      <a routerLink="/liabilities" routerLinkActive="bg-slate-800 text-amber-400 border-r-4 border-amber-400" 
+         class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-all group">
+        <i class="fa-solid fa-file-invoice-dollar w-5 group-hover:scale-110 transition-transform"></i>
+        <span class="font-medium">{{ lang.t().liabilities }}</span>
+      </a>
+
+      <a routerLink="/zakat" routerLinkActive="bg-slate-800 text-amber-400 border-r-4 border-amber-400" 
+         class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-all group">
+        <i class="fa-solid fa-hand-holding-heart w-5 group-hover:scale-110 transition-transform"></i>
+        <span class="font-medium">{{ lang.t().zakat }}</span>
+      </a>
+    </nav>
+
+    <div class="p-4 border-t border-slate-700">
+      <button (click)="lang.toggleLanguage()" 
+        class="flex items-center justify-center w-full gap-2 bg-slate-800 hover:bg-slate-700 text-slate-300 py-2 rounded-lg transition-colors border border-slate-600">
+        <i class="fa-solid fa-globe"></i>
+        <span>{{ lang.currentLang() === 'en' ? 'English' : 'العربية' }}</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile Header -->
+  <div class="md:hidden fixed top-0 w-full bg-slate-900 text-white z-30 px-4 py-3 shadow-md flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <i class="fa-solid fa-kaaba text-amber-400 text-xl"></i>
+      <span class="font-bold text-lg text-amber-500">{{ lang.t().appTitle }}</span>
+    </div>
+    <button (click)="toggleMenu()" class="text-white focus:outline-none">
+      <i class="fa-solid fa-bars text-2xl"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  @if (isMobileMenuOpen) {
+    <div class="fixed inset-0 bg-black/50 z-40 md:hidden" (click)="closeMenu()"></div>
+    <div class="fixed inset-y-0 right-0 w-64 bg-slate-900 text-white z-50 transform transition-transform duration-300 md:hidden flex flex-col"
+         [class.translate-x-0]="isMobileMenuOpen"
+         [class.translate-x-full]="!isMobileMenuOpen">
+       <div class="p-4 flex justify-between items-center border-b border-slate-700">
+         <span class="font-bold text-amber-500">Menu</span>
+         <button (click)="closeMenu()" class="text-slate-400 hover:text-white">
+           <i class="fa-solid fa-times text-xl"></i>
+         </button>
+       </div>
+       <nav class="flex-1 p-4 space-y-2">
+        <a routerLink="/dashboard" (click)="closeMenu()" class="block px-4 py-3 rounded hover:bg-slate-800 text-slate-300">{{ lang.t().dashboard }}</a>
+        <a routerLink="/transactions" (click)="closeMenu()" class="block px-4 py-3 rounded hover:bg-slate-800 text-slate-300">{{ lang.t().transactions }}</a>
+        <a routerLink="/liabilities" (click)="closeMenu()" class="block px-4 py-3 rounded hover:bg-slate-800 text-slate-300">{{ lang.t().liabilities }}</a>
+        <a routerLink="/zakat" (click)="closeMenu()" class="block px-4 py-3 rounded hover:bg-slate-800 text-slate-300">{{ lang.t().zakat }}</a>
+       </nav>
+       <div class="p-4 border-t border-slate-700">
+          <button (click)="lang.toggleLanguage(); closeMenu()" class="w-full py-2 bg-slate-800 rounded text-center">
+             {{ lang.currentLang() === 'en' ? 'العربية' : 'English' }}
+          </button>
+       </div>
+    </div>
+  }
+
+  <!-- Main Content -->
+  <main class="flex-1 flex flex-col overflow-hidden relative w-full">
+    <!-- Top Bar for Desktop (Optional, good for user profile or alerts) -->
+    <header class="hidden md:flex bg-white dark:bg-slate-800 shadow-sm px-8 py-4 justify-between items-center z-10">
+      <h2 class="text-xl font-bold text-slate-800 dark:text-white capitalize">
+        <!-- Breadcrumb or Page Title placeholder -->
+        {{ lang.t().appTitle }}
+      </h2>
+      <div class="flex items-center gap-4">
+        <!-- Notification bell or similar could go here -->
+      </div>
+    </header>
+
+    <!-- Scrollable Content Area -->
+    <div class="flex-1 overflow-y-auto p-4 md:p-8 pt-16 md:pt-8 bg-slate-50 dark:bg-slate-900/50">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+</div>

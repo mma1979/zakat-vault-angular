@@ -1,0 +1,5 @@
+{
+  "name": "ZakatVault",
+  "description": "A comprehensive savings manager and Zakat calculator with real-time gold and currency rates via Gemini.",
+  "requestFramePermissions": []
+}
